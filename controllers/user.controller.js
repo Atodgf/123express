@@ -43,12 +43,9 @@ class UserController {
 
     async deleteUser(req, res) {
         const id_param = req.params.id
-        for (let i = 0; i < asd.length; i++){
-            if (asd[i].id == id_param) {
-                newUSers.push(asd[i])
-            }
-        }
-        res.send(newUSers) 
+        delete asd[id_param-1]
+        fs.writeFileSync('users.json', JSON.stringify(asd))
+        res.send("Пользователь удалён!") 
     }
 
 }
