@@ -10,13 +10,14 @@ class UserController {
 
     async getOneUser(req, res) {
         const id_param = req.params.id
-        const newUSers = []
+        const newUsers = []
         for (let i = 0; i < asd.length; i++){
             if (asd[i].id == id_param) {
-                newUSers.push(asd[i])
+                newUsers.push(asd[i])
             }
         }
-        res.send(newUSers)
+        console.log(newUsers)
+        res.send(newUsers)
     }
 
     async createUser(req, res) {
@@ -27,17 +28,6 @@ class UserController {
     }
 
     async updateUser(req, res) {
-        const id_param = req.params.id
-        const name_param = req.body.name
-        const surname_param = req.body.surname
-        for (let i = 0; i < asd.length; i++){
-            if (asd[i].id == id_param) {
-                asd[i].name == name_param
-                asd[i].surname == surname_param
-                console.log(asd[i].surname)
-            }
-            
-        }
         res.send('s')
     }
 
@@ -45,7 +35,7 @@ class UserController {
         const id_param = req.params.id
         delete asd[id_param-1]
         fs.writeFileSync('users.json', JSON.stringify(asd))
-        res.send("Пользователь удалён!") 
+        res.send(asd) 
     }
 
 }
