@@ -16,7 +16,6 @@ class UserController {
                 newUsers.push(asd[i])
             }
         }
-        console.log(newUsers)
         res.send(newUsers)
     }
 
@@ -28,14 +27,31 @@ class UserController {
     }
 
     async updateUser(req, res) {
-        res.send('s')
+        const id_param = req.params.id
+        const name_param = req.body.name
+        const surname_param = req.body.surname
+        const newUsers = []
+        for (let i = 0; i < asd.length; i++){
+            if (asd[i].id == id_param) {
+                newUsers.push(asd[i])
+            }
+        }
+        newUsers[0].name = name_param
+        newUsers[0].surname = surname_param
+        console.log(newUsers)
+        res.send("ok")
     }
 
     async deleteUser(req, res) {
         const id_param = req.params.id
-        delete asd[id_param-1]
-        fs.writeFileSync('users.json', JSON.stringify(asd))
-        res.send(asd) 
+        const newUsers = []
+        for (let i = 0; i < asd.length; i++){
+            if (asd[i].id != id_param) {
+                newUsers.push(asd[i])
+            }
+        }
+        fs.writeFileSync('users.json', JSON.stringify(newUsers))
+        res.send("ok") 
     }
 
 }
