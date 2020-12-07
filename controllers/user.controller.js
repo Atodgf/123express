@@ -38,8 +38,15 @@ class UserController {
         }
         newUsers[0].name = name_param
         newUsers[0].surname = surname_param
-        console.log(newUsers)
-        res.send("ok")
+        const restUsers = []
+        for (let i = 0; i < asd.length; i++){
+            if (asd[i].id != id_param) {
+                restUsers.push(asd[i])
+            }
+        }
+        let finalUsers = restUsers.concat(newUsers)
+        fs.writeFileSync('users.json', JSON.stringify(finalUsers))
+        res.send('Данные пользователя успешно изменёны!')
     }
 
     async deleteUser(req, res) {
@@ -51,7 +58,7 @@ class UserController {
             }
         }
         fs.writeFileSync('users.json', JSON.stringify(newUsers))
-        res.send("ok") 
+        res.send('Данные пользователя успешно удалены!') 
     }
 
 }
