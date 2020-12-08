@@ -1,27 +1,27 @@
-const mysql = require('mysql')
+// const mysql = require('mysql')
+// const db = require('./db')
 
+// const conn = mysql.createConnection({
+//     host: "localhost",
+//     port: "3307",
+//     user: "root",
+//     password: "root"
+// })
 
-const conn = mysql.createConnection({
-    host: "localhost",
-    port: "3307",
-    user: "root",
-    password: "root"
-})
+// conn.connect(err =>{
+//     if (err) {
+//         return err
+//     }
+//     else {
+//         console.log('Database ------- OK')
+//     }
+// })
 
-conn.connect(err =>{
-    if (err) {
-        return err
-    }
-    else {
-        console.log('Database ------- OK')
-    }
-})
+// let query="SELECT * FROM test.users;"
 
-let query="SELECT * FROM test.users;"
-
-conn.query(query, (err, result) => {
-    console.log(err)
-    console.log(result)
-    return (result)
-})
+// conn.query(query, (err, result) => {
+//     console.log(err)
+//     console.log(result)
+//     return (result)
+// })
 
