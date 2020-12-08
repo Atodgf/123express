@@ -3,70 +3,60 @@ const users = fs.readFileSync('users.json', 'utf-8') //string
 const asd = JSON.parse(users)
 
 
+
 class UsersService {
-    async getUser(req, res) {
-        res.send(asd)
+    getUsers() {
+        return(asd)
     }
 
-    async getOneUser(req, res) {
-        const id_param = req.params.id
+    getOneUser(id) {
         const newUsers = []
         for (let i = 0; i < asd.length; i++) {
-            if (asd[i].id == id_param) {
+            if (asd[i].id == id) {
                 newUsers.push(asd[i])
             }
         }
-        res.send(newUsers)
+        return newUsers
     }
 
-    async createUser(req, res) {
-        const {
-            id,
-            name,
-            surname
-        } = req.body
-        let newUsers = asd.concat([{
-            id,
-            name,
-            surname
-        }])
+    createUser(id) {
+        console.log(id)
+        let newUsers = asd.concat([id])
         fs.writeFileSync('users.json', JSON.stringify(newUsers))
-        res.send('New User created!')
+        return('Новый пользователь создан!')
     }
 
-    async updateUser(req, res) {
-        const id_param = req.params.id
-        const name_param = req.body.name
-        const surname_param = req.body.surname
+    updateUser(id, body) {
         const newUsers = []
         for (let i = 0; i < asd.length; i++) {
-            if (asd[i].id == id_param) {
+            if (asd[i].id == id) {
                 newUsers.push(asd[i])
             }
         }
-        newUsers[0].name = name_param
-        newUsers[0].surname = surname_param
+        newUsers[0].name = body.name
+        newUsers[0].surname = body.surname
+        
+    
         const restUsers = []
         for (let i = 0; i < asd.length; i++) {
-            if (asd[i].id != id_param) {
+            if (asd[i].id != id) {
                 restUsers.push(asd[i])
             }
         }
         let finalUsers = restUsers.concat(newUsers)
         fs.writeFileSync('users.json', JSON.stringify(finalUsers))
-        res.send('Данные пользователя успешно изменёны!')
+        return ('Данные пользователя успешно изменёны!')
     }
 
-    async deleteUser(req, res) {
-        const id_param = req.params.id
+    deleteUser(id) {
         const newUsers = []
         for (let i = 0; i < asd.length; i++) {
-            if (asd[i].id != id_param) {
+            if (asd[i].id != id) {
                 newUsers.push(asd[i])
             }
         }
         fs.writeFileSync('users.json', JSON.stringify(newUsers))
-        res.send('Данные пользователя успешно удалены!')
+        return('Данные пользователя успешно удалены!')
     }
 
 }
