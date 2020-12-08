@@ -2,17 +2,17 @@ const Sequelize = require('sequelize')
 
 module.exports = function (sequelize) {
     return sequelize.define('test', {
-        id : {
+        Id : {
             type : Sequelize.INTEGER,
             autoIncrement : true,
             primaryKey : true,
             allowNull : false 
         },
-        name : {
+        Name_id : {
             type : Sequelize.STRING,
             allowNull : false 
         },
-        surname : {
+        Surname_id : {
             type : Sequelize.STRING,
             allowNull : false 
         }

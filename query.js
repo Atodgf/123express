@@ -10,7 +10,6 @@ const conn = mysql.createConnection({
 
 conn.connect(err =>{
     if (err) {
-        console.log(err)
         return err
     }
     else {
@@ -23,4 +22,6 @@ let query="SELECT * FROM test.users;"
 conn.query(query, (err, result) => {
     console.log(err)
     console.log(result)
+    return (result)
 })
+
