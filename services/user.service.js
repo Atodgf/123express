@@ -1,5 +1,5 @@
 const fs = require('fs')
-const users = fs.readFileSync('users.json', 'utf-8') //string
+const users = fs.readFileSync('users.json', 'utf-8') 
 const asd = JSON.parse(users)
 
 
