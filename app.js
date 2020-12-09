@@ -4,8 +4,6 @@ const userRouter = require('./routes/user.routes')
 const app = express()
 const port = 3000
 
-const db = require('./db')
-const Test = db.test
 
 app.use(express.json())
 app.use('/api', userRouter)

@@ -1,6 +1,6 @@
 const Router = require('express')
 const router = new Router()
-const userController = require('../controllers/user.controller')
+const userController = require('../db/user.controllerDB')
 
 router
     .get('/user', userController.getUsers) //получить всех пользователей
