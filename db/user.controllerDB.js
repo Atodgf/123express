@@ -1,13 +1,6 @@
 const db = require('./db')
 class UserControllerDB {
 
-    async createUser(req, res) {
-        const {id, name, surname} = req.body
-        await db.query(`INSERT INTO person (id, name, surname) values($1, $2, $3) RETURNING * `, [id, name, surname])
-        res.json('Пользователь успешно создан!')
-    }
-
-
     async getUsers(req, res) {
         const users = await db.query(`SELECT * FROM person`)
         res.json(users.rows)
@@ -19,6 +12,11 @@ class UserControllerDB {
         res.json(user.rows[0])
     }
 
+    async createUser(req, res) {
+        const {id, name, surname} = req.body
+        await db.query(`INSERT INTO person (id, name, surname) values($1, $2, $3) RETURNING * `, [id, name, surname])
+        res.json('Пользователь успешно создан!')
+    }
 
     async updateUser(req, res) {
         const id = req.params.id
