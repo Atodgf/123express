@@ -6,7 +6,7 @@ const port = 3000
 
 
 app.use(express.json())
-app.use('/api', userRouter)
+app.use('/users', userRouter)
 
 
 app.listen(port, () => {

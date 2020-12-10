@@ -1,10 +1,16 @@
-const usersService = require('../services/user.service')
+const usersService = require('../services/users.serviceDB')
 class UsersController {
     service = usersService
+    
+
     getUsers = (req, res) => {
+        console.log('test')
         res
             .status(200)
-            .send(this.service.getUsers())
+            .send({
+                users: this.service.getUsers(),
+                // login: req.login
+            })
     }
 
     getOne = (req, res) => {
@@ -31,6 +37,13 @@ class UsersController {
             .send(this.service.deleteUser(req.params.id))
     }
 
+    login = (req, res) => {
+        res.send(this.service.login(req.body.login, req.body.password))
+    }
+
+    me = (req, res) => {
+        res.send({login: req.login})
+    }
 
 
 }

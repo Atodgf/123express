@@ -1,10 +1,20 @@
 const fs = require('fs')
 const users = fs.readFileSync('users.json', 'utf-8') 
 const asd = JSON.parse(users)
+const jwt = require('jsonwebtoken')
 
 
 
 class UsersService {
+
+    // login = (login, password) => {
+    //     //some auth logic
+    //     const token = jwt.sign({ login }, 'secret')
+    //     return token
+    // }
+
+
+
     getUsers() {
         return(asd)
     }

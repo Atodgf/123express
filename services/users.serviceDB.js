@@ -1,10 +1,21 @@
-const db = require('./db')
+const db = require('../db/db')
+const jwt = require('jsonwebtoken')
+
 class UserControllerDB {
+
+    // login = (login, password) => {
+    //     //some auth logic
+    //     const token = jwt.sign({ login }, 'secret')
+    //     return token
+    // }
+    
 
     async getUsers(req, res) {
         const users = await db.query(`SELECT * FROM person`)
-        res.json(users.rows)
+        console.log (users.rows)
+        return(users.rows)
     }
+    
 
     async getOne(req, res) {
         const id = req.params.id
