@@ -7,11 +7,6 @@ const jwt = require('jsonwebtoken')
 
 class UsersService {
 
-    // login = (login, password) => {
-    //     //some auth logic
-    //     const token = jwt.sign({ login }, 'secret')
-    //     return token
-    // }
 
 
 
@@ -72,3 +67,21 @@ class UsersService {
 }
 
 module.exports = new UsersService()
+
+
+// const sequelize = new Sequelize('node_postgres', 'postgres', 'root', {
+//     host: 'localhost',
+//     dialect: 'postgres'
+//   }
+//   )
+//   try {
+//     sequelize.authenticate();
+//     console.log('Connection has been established successfully.');
+//   } catch (error) {
+//     console.error('Unable to connect to the database:', error);
+//   }
+
+
+  
+
+
