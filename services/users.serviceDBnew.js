@@ -17,7 +17,7 @@ const User = sequelize.define("users", {
   class UserServicesDB {
 
     async createUser(body) {
-        await User.create({ name: body.name, surname: body.surname});
+        await User.create({id:body.id, name: body.name, surname: body.surname});
         return ('Пользователь успешно создан!')
     }
 
@@ -45,7 +45,6 @@ const User = sequelize.define("users", {
         await user.save({ fields: ['name', 'surname'] })
         return ('Пользователь успешно обновлён!')
         }
-        
     }
 
     async deleteUser(id) {
@@ -56,13 +55,8 @@ const User = sequelize.define("users", {
             await user.destroy()
             return ('Пользователь успешно удалён!')
         }
-       
     }
-
-
   }
-
-
 module.exports = new UserServicesDB()
   
 
