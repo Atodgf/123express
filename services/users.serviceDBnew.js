@@ -43,6 +43,7 @@ const User = sequelize.define("users", {
         user.name = body.name
         user.surname = body.surname
         await user.save({ fields: ['name', 'surname'] })
+        return ('Пользователь успешно обновлён!')
         }
         
     }
@@ -53,6 +54,7 @@ const User = sequelize.define("users", {
         console.log('Not found!');
         } else {
             await user.destroy()
+            return ('Пользователь успешно удалён!')
         }
        
     }
