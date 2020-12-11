@@ -29,7 +29,7 @@ const User = sequelize.define("users", {
     async getOneUser(id) {
         const user = await User.findOne({ where: { id: id } });
         if (user === null) {
-        console.log('Not found!');
+        return('Такого пользовтеля не существует!');
         } else {
         return(await user.dataValues); 
         }
@@ -38,7 +38,7 @@ const User = sequelize.define("users", {
     async updateUser(id, body) {
         const user = await User.findOne({ where: { id: id } });
         if (user === null) {
-        console.log('Not found!');
+            return('Такого пользовтеля не существует!');
         } else {
         user.name = body.name
         user.surname = body.surname
@@ -50,7 +50,7 @@ const User = sequelize.define("users", {
     async deleteUser(id) {
         const user = await User.findOne({ where: { id: id } });
         if (user === null) {
-        console.log('Not found!');
+            return('Такого пользовтеля не существует!');
         } else {
             await user.destroy()
             return ('Пользователь успешно удалён!')
