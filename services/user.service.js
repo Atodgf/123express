@@ -7,7 +7,10 @@ const jwt = require('jsonwebtoken')
 
 class UsersService {
 
-
+    login = (login, password) => {
+        const token = jwt.sign({login}, 'secret')
+        return token
+    }
 
 
     getUsers() {

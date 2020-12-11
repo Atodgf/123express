@@ -7,7 +7,10 @@ class UsersController {
         this.service.getUsers().then(result => res.send(result))
         // res
         //     .status(200)
-        //     .send(this.service.getUsers())
+        //     .send({
+        //         users: this.service.getUsers(),
+        //         login: req.login
+        //     })
     }
 
     getOne = (req, res) => {
@@ -37,6 +40,10 @@ class UsersController {
         //     .status(200)
         //     .send(this.service.deleteUser(req.params.id))
     }
+
+    // login = (req, res) => {
+    //     res.send(this.service.login(req.body.login, req.body.password))
+    // }
 }
 
 module.exports = new UsersController()
