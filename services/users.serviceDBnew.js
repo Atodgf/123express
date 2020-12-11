@@ -23,7 +23,7 @@ const User = sequelize.define("users", {
 
     async getUsers() {
         const users = await User.findAll();
-        console.log(JSON.stringify(users, null, 2));
+        return(users);
     }
 
     async getOneUser(id) {
@@ -31,7 +31,7 @@ const User = sequelize.define("users", {
         if (user === null) {
         console.log('Not found!');
         } else {
-        console.log(user.dataValues); 
+        return(await user.dataValues); 
         }
     }
 
