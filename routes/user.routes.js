@@ -10,5 +10,5 @@ router
     .put('/:id', auth,  userController.updateUser) //обновить пользователя по id
     .delete('/:id', auth,  userController.deleteUser) //удалить пользователя
     .post('/login', userController.login)
-    .get('/me', auth, userController.me)
+    // .get('/me', auth, userController.me)
 module.exports = router

@@ -5,9 +5,7 @@ class UsersController {
 
     getUsers = (req, res) => {
         this.service.getUsers()
-        .then(result => 
-            res.send({login: req.login,
-                    users: result}))
+        .then(result => res.send(result))
         // res
         //     .status(200)
         //     .send({
@@ -15,15 +13,11 @@ class UsersController {
         //         login: req.login
         //     })
     }
-    me = (req, res) => {
-        res.send({login: req.login})
-    }
+    
 
     getOne = (req, res) => {
         this.service.getOneUser(req.params.id)
-        .then(result => 
-            res.send({login: req.login,
-                users: result}))
+        .then(result => res.send(result))
         // res
         //     .status(200)
         //     .send(this.service.getOneUser(req.params.id))
@@ -49,6 +43,10 @@ class UsersController {
         //     .status(200)
         //     .send(this.service.deleteUser(req.params.id))
     }
+
+    // me = (req, res) => {
+    //     res.send({login: req.login})
+    // }
 
     login = (req, res) => {
         this.service.login(req.body.name, req.body.password).then(result => res.send(result))
