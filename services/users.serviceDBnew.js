@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const { Sequelize, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt')
 const sequelize = new Sequelize('node_postgres', 'postgres', 'root', {
     host: 'localhost',
     dialect:'postgres'
@@ -13,13 +14,21 @@ const User = sequelize.define("users", {
     },
     name: DataTypes.STRING,
     surname: DataTypes.STRING,
+    password: DataTypes.STRING,
   },{timestamps: false});
   
 class UserServicesDB {
-    // login = (login, password) => {
-    //     const token = jwt.sign({login}, 'secret')
-    //     return token
-    // }
+    async login (name)  {
+        const user = await User.findOne({ where: { name: name } });
+        if (user === null) {
+        return('Такого пользовтеля не существует!');
+        } else {
+            const token = jwt.sign({name}, 'secret')
+            user.password = token
+            await user.save({ fields: ['password'] })
+            return (`Авторизация прошла успешно, ваш пароль: ${token}`)
+        }
+    }
 
     async createUser(body) {
         await User.create({id:body.id, name: body.name, surname: body.surname});
