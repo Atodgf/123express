@@ -18,15 +18,15 @@ const User = sequelize.define("users", {
   },{timestamps: false});
   
 class UserServicesDB {
-    async login (name)  {
+    async login (name, password)  {
         const user = await User.findOne({ where: { name: name } });
         if (user === null) {
         return('Такого пользовтеля не существует!');
         } else {
-            const token = jwt.sign({name}, 'secret')
+            const token = jwt.sign({name, password}, 'secret')
             user.password = token
             await user.save({ fields: ['password'] })
-            return (`Авторизация прошла успешно, ваш пароль: ${token}`)
+            return (`Авторизация прошла успешно, ваш токен для авторизации: ${token}`)
         }
     }
 
