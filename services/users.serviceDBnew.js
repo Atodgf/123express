@@ -15,6 +15,7 @@ const User = sequelize.define("users", {
     name: DataTypes.STRING,
     surname: DataTypes.STRING,
     password: DataTypes.STRING,
+    avatar: DataTypes.STRING
   },{timestamps: false});
   
 class UserServicesDB {
@@ -30,8 +31,8 @@ class UserServicesDB {
         }
     }
 
-    async createUser(body) {
-        await User.create({id:body.id, name: body.name, surname: body.surname});
+    async createUser(dataToUpdate) {
+        await User.create({id:dataToUpdate.id, name: dataToUpdate.name, surname: dataToUpdate.surname, avatar: dataToUpdate.avatar});
         return ('Пользователь успешно создан!')
     }
 
