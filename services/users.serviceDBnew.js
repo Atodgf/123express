@@ -21,11 +21,11 @@ class UserServicesDB {
     }
 
     async getUsers(page, count) {
-        const users = await User.findAll({
+        const users = await User.findAndCountAll({
             limit:page,
             offset:count
         });
-        return({page: page, count: count, users: [users]});
+        return({users: users.rows, page: page, count: count, totalCount: users.count});
     }
 
     async getOneUser(id) {
