@@ -1,23 +1,7 @@
 const jwt = require('jsonwebtoken')
-const { Sequelize, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt')
-const sequelize = new Sequelize('node_postgres', 'postgres', 'root', {
-    host: 'localhost',
-    dialect:'postgres'
-  });
+const User = require('../models/user');
 
-const User = sequelize.define("users", {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    name: DataTypes.STRING,
-    surname: DataTypes.STRING,
-    password: DataTypes.STRING,
-    avatar: DataTypes.STRING
-  },{timestamps: false});
-  
+
 class UserServicesDB {
     async login (name, password)  {
         const user = await User.findOne({ where: { name: name } });
@@ -36,17 +20,21 @@ class UserServicesDB {
         return ('Пользователь успешно создан!')
     }
 
-    async getUsers() {
-        const users = await User.findAll();
-        return(users);
+    async getUsers(page, count) {
+        const users = await User.findAll({
+            limit:page,
+            offset:count
+        });
+        console.log(users)
+        return({page: page, count: count, users: [users]});
     }
 
     async getOneUser(id) {
-        const user = await User.findOne({ where: { id: id } });
+        const user = await User.findByPk(id, {include: ['photos']});
         if (user === null) {
         return('Такого пользовтеля не существует!');
         } else {
-        return(await user.dataValues); 
+        return(user.dataValues); 
         }
     }
 
