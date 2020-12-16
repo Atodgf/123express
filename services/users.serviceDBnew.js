@@ -25,7 +25,6 @@ class UserServicesDB {
             limit:page,
             offset:count
         });
-        console.log(users)
         return({page: page, count: count, users: [users]});
     }
 
