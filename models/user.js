@@ -19,10 +19,5 @@ const User = sequelize.define("users", {
   }, {timestamps: false});
 
 User.hasMany(Photo, {as: 'photos', foreignKey:'user_id'})
-// Photo.hasOne(User, {
-//     foreignKey: {
-//         name: 'id'
-//     }
-// })
 
 module.exports = User

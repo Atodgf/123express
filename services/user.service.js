@@ -66,25 +66,6 @@ class UsersService {
         fs.writeFileSync('users.json', JSON.stringify(newUsers))
         return('Данные пользователя успешно удалены!')
     }
-
 }
 
 module.exports = new UsersService()
-
-
-// const sequelize = new Sequelize('node_postgres', 'postgres', 'root', {
-//     host: 'localhost',
-//     dialect: 'postgres'
-//   }
-//   )
-//   try {
-//     sequelize.authenticate();
-//     console.log('Connection has been established successfully.');
-//   } catch (error) {
-//     console.error('Unable to connect to the database:', error);
-//   }
-
-
-  
-
-
