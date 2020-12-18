@@ -1,23 +1,27 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/user');
+const bcrypt = require('bcrypt')
 
 
 class UserServicesDB {
     async login (name, password)  {
         const user = await User.findOne({ where: { name: name } });
         if (user === null) {
-        return('Такого пользовтеля не существует!');
+        return('User not exist!');
         } else {
+            if (bcrypt.compareSync(password, user.password)  != true){
+                return ("Invalid password!")
+            } else {
             const token = jwt.sign({name, password}, 'secret')
-            user.password = token
-            await user.save({ fields: ['password'] })
-            return (`Авторизация прошла успешно, ваш токен для авторизации: ${token}`)
+            return (`Success, your jwt token: ${token}`)}
         }
     }
 
     async createUser(dataToUpdate) {
-        await User.create({id:dataToUpdate.id, name: dataToUpdate.name, surname: dataToUpdate.surname, avatar: dataToUpdate.avatar});
-        return ('Пользователь успешно создан!')
+        const saltRounds = 10
+        const hash  =  bcrypt.hashSync(dataToUpdate.password, saltRounds);
+        await User.create({id:dataToUpdate.id, name: dataToUpdate.name, surname: dataToUpdate.surname, avatar: dataToUpdate.avatar, password: hash });
+        return ('User successfully created!')
     }
 
     async getUsers(page, count) {
@@ -31,7 +35,7 @@ class UserServicesDB {
     async getOneUser(id) {
         const user = await User.findByPk(id, {include: ['photos']});
         if (user === null) {
-        return('Такого пользовтеля не существует!');
+        return('User not exist!');
         } else {
         return(user.dataValues); 
         }
@@ -40,22 +44,22 @@ class UserServicesDB {
     async updateUser(id, body) {
         const user = await User.findOne({ where: { id: id } });
         if (user === null) {
-            return('Такого пользовтеля не существует!');
+            return('User not exist!');
         } else {
         user.name = body.name
         user.surname = body.surname
         await user.save({ fields: ['name', 'surname'] })
-        return ('Пользователь успешно обновлён!')
+        return ('User successfully updated!')
         }
     }
 
     async deleteUser(id) {
         const user = await User.findOne({ where: { id: id } });
         if (user === null) {
-            return('Такого пользовтеля не существует!');
+            return('User not exist!');
         } else {
             await user.destroy()
-            return ('Пользователь успешно удалён!')
+            return ('User successfully deleted!')
         }
     }
   }

@@ -31,7 +31,6 @@ class UsersController {
     }
 
     login = (req, res) => {
-        console.log(req.body.password)
         this.service.login(req.body.name, req.body.password).then(result => res.send(result))
     }
 }
