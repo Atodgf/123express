@@ -9,15 +9,15 @@ const loginUserScheme = require('../validation-schemes/login-user.scheme')
 const updateUserScheme = require('../validation-schemes/update-user.scheme')
 
 router
-    .get('/', userController.getUsers) //получить всех пользователей
-    .get('/:id', auth,  userController.getOne) //получить пользователя по id
-    .post('/', multerMiddleware, userController.createUser) //создать пользователя
-    .put('/:id', auth,validate(updateUserScheme),  userController.updateUser) //обновить пользователя по id
-    .delete('/:id', auth,  userController.deleteUser) //удалить пользователя
-    .post('/login',validate(loginUserScheme), userController.login)//получение JSON токена если пользователь есть в базе
+    .get('/', userController.getUsers) 
+    .get('/:id', auth,  userController.getOne) 
+    .post('/', multerMiddleware, userController.createUser) 
+    .put('/:id', auth,validate(updateUserScheme),  userController.updateUser) 
+    .delete('/:id', auth,  userController.deleteUser) 
+    .post('/login',validate(loginUserScheme), userController.login)
 
-    .get('/photos/:id',  PhotoController.getOne) //получить фото пользователя по id
-    .post('/photos',multerMiddleware, PhotoController.createPhoto) //создать новое фото пользователя
-    .put('/photos/:id',multerMiddleware, PhotoController.updatePhoto) //обновить фото пользователя по id
-    .delete('/photos/:id',  PhotoController.deletePhoto) //удалить фото пользователя
+    .get('/photos/:id',  PhotoController.getOne) 
+    .post('/photos',multerMiddleware, PhotoController.createPhoto) 
+    .put('/photos/:id',multerMiddleware, PhotoController.updatePhoto) 
+    .delete('/photos/:id',  PhotoController.deletePhoto)
 module.exports = router
