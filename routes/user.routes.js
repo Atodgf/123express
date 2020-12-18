@@ -9,7 +9,7 @@ const loginUserScheme = require('../validation-schemes/login-user.scheme')
 const updateUserScheme = require('../validation-schemes/update-user.scheme')
 
 router
-    .get('/', userController.getUsers) 
+    .get('/',auth, userController.getUsers) 
     .get('/:id', auth,  userController.getOne) 
     .post('/', multerMiddleware, userController.createUser) 
     .put('/:id', auth,validate(updateUserScheme),  userController.updateUser) 
