@@ -16,7 +16,6 @@ class UsersController {
     }
 
     createUser = (req, res) => {
-        console.log(req)
         this.service.createUser({...JSON.parse(req.body.data)})
         .then(result => res.send(result))
     }
