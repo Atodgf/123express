@@ -1,9 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const userRouter = require('./routes/user.routes')
-const multer = require('multer')
-const uuid = require('uuid')
-const User = require('./models/user')
+
 
 const app = express()
 
